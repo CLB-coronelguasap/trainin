@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 import settings_menu
+import training
 
 # ASCII Art Banner using a recognizable format
 TACO_BELL_BANNER = r"""
@@ -75,7 +76,7 @@ def show_main_menu():
 
 
 def start_training():
-    messagebox.showinfo("Status", "Training module not yet implemented.")
+    training.start_training(root)
 
 
 def settings():

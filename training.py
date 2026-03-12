@@ -14,12 +14,15 @@ print(str(random.randint(1,2)) + 'x ' + random.choice(sizes) + ' ' + random.choi
 print(str(random.randint(1,3)) + 'x ' + random.choice(sizes) + ' ' + random.choice(sides))
 print(str(random.randint(1,2)) + 'x ' + random.choice(sauces) + ' Sauce')
 
-def start_training(root, on_back):
+def start_training(root):
     for widget in root.winfo_children():
         widget.destroy()
     
     game_frame = tk.Frame(root)
     game_frame.pack(expand=True)
     
-    customer = tk.PhotoImage(random.choice(os.listdir(os.getcwd() + '\\assets\\')))
+    customer_img = tk.PhotoImage(file=f"{os.getcwd() + '\\assets\\images\\customer\\'}{random.choice(os.listdir(str(os.getcwd()) + "\\assets\\images\\customer\\"))}")
+    customer = tk.Label(game_frame, customer_img)
+    customer.pack()
+    
     
