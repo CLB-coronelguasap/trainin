@@ -21,3 +21,5 @@ def start_training(root, on_back):
     game_frame = tk.Frame(root)
     game_frame.pack(expand=True)
     
+    customer = tk.PhotoImage(random.choice(os.listdir(os.getcwd() + 'assets\\')))
+    
