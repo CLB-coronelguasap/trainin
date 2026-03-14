@@ -1,0 +1,110 @@
+PROGRAM TacoBellTrainingSimulator
+
+CONSTANT TACO_BELL_BANNER ← ASCII Taco Bell banner text
+
+DECLARE root
+
+BEGIN
+    CREATE main window
+    SET window title TO "Taco Bell Training Simulator"
+    SET window TO fullscreen
+
+    WHEN Escape key is pressed
+        SET fullscreen TO FALSE
+    ENDWHEN
+
+    WHEN F11 key is pressed
+        TOGGLE fullscreen
+    ENDWHEN
+
+    CALL ShowLoginScreen
+
+    START main application loop
+END
+
+
+PROCEDURE ShowLoginScreen
+BEGIN
+    REMOVE all widgets from root window
+
+    CREATE top spacer frame
+    DISPLAY top spacer
+
+    CREATE login frame WITH border and padding
+    DISPLAY login frame
+
+    CREATE bottom spacer frame
+    DISPLAY bottom spacer
+
+    DISPLAY label "Taco Bell Simulator Login"
+
+    DISPLAY label "Username"
+    CREATE username input field
+
+    DISPLAY label "Password"
+    CREATE password input field WITH hidden characters
+
+    CREATE Login button
+
+    WHEN Login button is clicked
+        CALL AttemptLogin
+    ENDWHEN
+
+    CREATE Exit button
+    WHEN Exit button is clicked
+        CLOSE program
+    ENDWHEN
+END
+
+
+PROCEDURE AttemptLogin
+BEGIN
+    IF username input = "admin" AND password input = "password" THEN
+        CALL ShowMainMenu
+    ELSE
+        DISPLAY error message "Invalid username or password"
+    ENDIF
+END
+
+
+PROCEDURE ShowMainMenu
+BEGIN
+    REMOVE all widgets from root window
+
+    CREATE top frame
+    DISPLAY top frame
+
+    DISPLAY TACO_BELL_BANNER inside top frame
+
+    CREATE bottom frame
+    DISPLAY bottom frame
+
+    CREATE buttons frame
+
+    CREATE button "Start Training"
+    WHEN clicked
+        CALL StartTraining
+    ENDWHEN
+
+    CREATE button "Settings"
+    WHEN clicked
+        CALL Settings
+    ENDWHEN
+
+    CREATE button "Exit"
+    WHEN clicked
+        CLOSE program
+    ENDWHEN
+END
+
+
+PROCEDURE StartTraining
+BEGIN
+    CALL training.start_training USING root
+END
+
+
+PROCEDURE Settings
+BEGIN
+    CALL settings_menu.show_settings_menu USING root AND ShowMainMenu
+END

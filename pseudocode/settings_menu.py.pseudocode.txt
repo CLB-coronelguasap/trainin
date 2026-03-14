@@ -1,0 +1,40 @@
+PROCEDURE ShowSettingsMenu(root, on_back)
+
+BEGIN
+    CLEAR all elements from window
+
+    DISPLAY title "Settings Menu"
+
+    DISPLAY settings section
+
+    DISPLAY "Audio Volume" control
+    SET volume range from 0 to 100
+    SET default volume to 75
+
+    DISPLAY "Difficulty Level" selection
+    OPTIONS: Beginner, Intermediate, Hard, Expert
+    SET default difficulty to Normal
+
+    DISPLAY "Shift Duration" selection
+    OPTIONS: 4 Hours, 6 Hours, 8 Hours, 12 Hours
+    SET default shift to 8 Hours
+
+    DISPLAY checkbox "Fullscreen Mode"
+    SET checkbox value based on current window fullscreen state
+
+    WHEN checkbox is changed
+        UPDATE window fullscreen setting
+    ENDWHEN
+
+    DISPLAY button "Apply Settings"
+
+    WHEN button clicked
+        DISPLAY message "Settings applied successfully"
+    ENDWHEN
+
+    DISPLAY button "Back to Main Menu"
+
+    WHEN button clicked
+        CALL on_back
+    ENDWHEN
+END

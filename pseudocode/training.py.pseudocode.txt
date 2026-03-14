@@ -1,0 +1,105 @@
+PROGRAM TacoTrainingGame
+
+DECLARE menu lists:
+    MENU_MAINS
+    MENU_DRINKS
+    MENU_SIDES
+    MENU_SIZES
+    MENU_SAUCES
+
+DECLARE target_order_requirements
+DECLARE current_tray_items
+
+
+PROCEDURE StartTraining
+BEGIN
+    CREATE game window
+    CREATE TacoGame object
+    CALL ShowTutorial
+END
+
+
+PROCEDURE ShowTutorial
+BEGIN
+    DISPLAY instructions explaining how the game works
+    DISPLAY button "Start Game"
+
+    WHEN button clicked
+        CALL StartGame
+END
+
+
+PROCEDURE StartGame
+BEGIN
+    CLEAR screen
+    CALL GenerateRandomOrder
+    SET current_tray_items TO empty list
+
+    DISPLAY customer image
+    DISPLAY order ticket showing required items
+
+    DISPLAY menu categories:
+        Mains
+        Drinks
+        Sides & Sauces
+
+    DISPLAY tray where prepared items appear
+
+    DISPLAY buttons:
+        Remove Selected Item
+        Serve Order
+END
+
+
+PROCEDURE GenerateRandomOrder
+BEGIN
+    CLEAR target_order_requirements
+
+    SELECT random main item and quantity
+    ADD to order ticket
+
+    SELECT random drink and size
+    ADD to order ticket
+
+    SELECT random side and size
+    ADD to order ticket
+
+    SELECT random sauce
+    ADD to order ticket
+END
+
+
+PROCEDURE AddItemToTray(item)
+BEGIN
+    ADD item to current_tray_items
+    UPDATE tray display
+END
+
+
+PROCEDURE RemoveSelectedItem
+BEGIN
+    IF player selected item in tray THEN
+        REMOVE item from current_tray_items
+        UPDATE tray display
+    ENDIF
+END
+
+
+PROCEDURE ServeOrder
+BEGIN
+    COUNT each item currently in tray
+
+    IF tray items exactly match order ticket THEN
+        DISPLAY success message
+        START new game
+    ELSE
+        DISPLAY error message
+    ENDIF
+END
+
+
+PROGRAM EXECUTION
+BEGIN
+    CALL StartTraining
+    RUN application loop
+END
